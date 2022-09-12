@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+
+<head>
+<style type="text/css">
+
+    body{ 
+        font-family: sans-serif;
+        float:center;
+    }
+
+    h4{
+        padding:4px;
+        margin: 4px;        
+    }
+
+    h6{
+        padding:4px;
+        margin: 4px;        
+    }
+
+    textarea {
+      width: 48%;
+      height: 20%;
+      padding: 6px 6px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 1px;
+      background-color: #f8f8f8;
+      font-size: 16px;
+      resize: none;
+
+    }
+
+    input[type=button], input[type=reset] {
+      background-color: #04AA6D;
+      border: none;
+      color: white;
+      padding: 16px 32px;
+      text-decoration: none;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+    
+    div{
+        background-color: #EFFFEF;
+    }
+
+    span{
+        margin:1px;
+        padding:1px;
+        font-size: 16px;
+    }
+
+    .div_text_area{
+        width:100%;
+        display:inline-block;
+        float: right;
+        padding: 6px;
+    }
+    
+    .botoes{
+        float:right;
+        background-color: #FFFFFF;
+    }
+
+    .orientacao{
+        font-size: 16px;
+        margin:1px;
+        color: #0FAFA0;
+        text-align: center;
+    }
+
+    #match_para_troca{
+        text-align: center;
+        margin: auto;
+        width: 80%;
+        padding-right: 10px;
+        margin: 10%;
+        float:center;
+    }
+
+</style>
+
+<script type="text/javascript">
+
+    //remover primeira parte até os dois pontos
+    function ajuste_texto_1(texto){
+        let aux = texto.split(":");
+        return aux[1];
+    }
+
+    //operacoes lista de app nao oficial Panini
+    function ajuste_texto_2(texto){
+        let aux_lista = texto.split("\n");
+        let aux = "";        
+        for (let token of aux_lista){
+            //remover linhas em branco
+            if ((token == "")||token.includes("/"))
+                continue
+            //substituir quebra de linha por vírgula
+            aux += token+",";
+        }
+        aux = aux.slice(0,aux.length-1);
+        return aux;
+    }
+
+    //remover linhas com nomes de time
+    function ajuste_texto_3(conteudo){
+       //padrao app não oficial tem '/' para informar nomes de times
+        if (conteudo.includes("/")){
+            conteudo = ajuste_texto_2(conteudo);            
+        }
+        return conteudo;
+    }
+
+    function carregarListas(){    
+        var meus_interesses, minhas_refugas, interesses_dele, refugas_dele, match_pra_mim, match_para_ele;
+
+        
+        let aux = document.getElementById("me_interessam").value;
+        if(aux != ""){
+            aux = ajuste_texto_1(aux);//remove string que não são códigos de figuras
+            aux = ajuste_texto_3(aux);//verif. se padrao é o do app alternativo e normailiza
+        }
+        meus_interesses = aux.split(",");
+
+        aux = document.getElementById("minhas_refugas").value;
+        if(aux != ""){
+            aux = ajuste_texto_1(aux);//remove string que não são códigos de figuras
+            aux = ajuste_texto_3(aux);//verif. se padrao é o do app alternativo e normailiza
+            
+        }
+        minhas_refugas = aux.split(",");
+
+        aux = document.getElementById("lhes_interessa").value;
+        if(aux != ""){
+            aux = ajuste_texto_1(aux);//remove string que não são códigos de figuras
+            aux = ajuste_texto_3(aux);//verif. se padrao é o do app alternativo e normailiza       
+        }
+        interesses_dele = aux.split(",");
+
+        aux = document.getElementById("suas_refugas").value;
+        if(aux != ""){
+            aux = ajuste_texto_1(aux);//remove string que não são códigos de figuras
+            aux = ajuste_texto_3(aux);//verif. se padrao é o do app alternativo e normailiza
+        }
+        refugas_dele = aux.split(",");
+
+        match_pra_mim = [];        
+        if (meus_interesses.length > 1 && refugas_dele.length > 1){
+
+            for (let i = 0; i < meus_interesses.length; i++){
+                for (let j = 0; j < refugas_dele.length; j++){                
+                    if (meus_interesses[i].trim() == refugas_dele[j].trim())
+                        match_pra_mim.push(refugas_dele[j].trim());
+                } 
+            }
+        
+        }else{
+            match_pra_mim.push("Para ver as figuras que possam te interesssar, preencha os campos: 'Lista de Figuras que Eu Quero' e 'Figuras que ele oferece para troca'");
+        }
+        
+
+        match_para_ele = [];
+        if (interesses_dele.length > 1 && minhas_refugas.length > 1){
+         
+            for(i=0; i < interesses_dele.length; i++){
+                for(j=0; j < minhas_refugas.length;j++){
+                    if (interesses_dele[i].trim() == minhas_refugas[j].trim())
+                        match_para_ele.push(minhas_refugas[j].trim());
+                }
+
+            }
+        }else{
+            
+            match_para_ele.push("Para ver as figuras do colega que possam te  interessar, preencha os campos: 'Figuras que Ofereço pra Troca' e 'Figuras que interessam à pessoa'");
+
+        }   
+
+        document.getElementById("refugas_me_interessam").innerHTML = match_pra_mim.toString();
+
+        let total_me_interessam = document.getElementById("qtas_me_interessam");
+        if (match_pra_mim.length > 1)
+            total_me_interessam.innerHTML = match_pra_mim.length;
+        else
+            total_me_interessam.innerHTML = "Sem Figuras";
+
+
+        document.getElementById("refugas_lhes_interessa").innerHTML = match_para_ele.toString();
+
+        
+        let total_lhes_interessa = document.getElementById("qtas_interessam_a_ele");
+        if (match_para_ele.length > 1)
+            total_lhes_interessa = total_lhes_interessa.length;
+        else
+            total_lhes_interessa.innerHTML = "Sem Figuras";
+    }
+
+    function limpar(){
+
+        
+        document.getElementById("me_interessam").value = "";              
+        document.getElementById("suas_refugas").value = "";
+        document.getElementById("lhes_interessa").value = "";
+        document.getElementById("minhas_refugas").value = "";
+
+        document.getElementById("refugas_me_interessam").value = "";
+        document.getElementById("qtas_me_interessam").value = "";
+        document.getElementById("refugas_lhes_interessa").value = "";
+        document.getElementById("qtas_interessam_a_ele").value = "";       
+
+    }
+
+</script>
+
+
+</head>
+
+
+<body>
+
+    <p class="orientacao">Informe duas listas, pelo menos: <br/>
+        1. as que te interessam e as refugos do colega; ou
+        2. as que interessam ao colega e as suas refugos. <br/>
+        Se quiser, forneça todas as listas de figuras de uma só vez e o sistema apresentará as possibilidades de troca.</p>
+
+    <div id="match_para_troca">
+
+        <div id="meus_interesses" class="div_text_area">
+            <h4> Identificar as figuras que eu quero nas refugas do colega </h4>
+            <textarea id="me_interessam" placeholder="Lista de figuras que eu quero"></textarea>                
+            <textarea id="suas_refugas" placeholder = "Figuras de figuras refugas do colega"></textarea>
+            <div id="meu_interesse"> 
+                <h6> Refugas dele que me interessam</h6>
+                <span>
+                    Pra mim:<p id="refugas_me_interessam"> <p/>
+                    Total:<p id="qtas_me_interessam"></p>
+                </span>
+            </div>
+        </div>
+
+        <div id="interesses_dele" class="div_text_area">
+            <h4> Identificar as figuras que ele quer entre as minhas refugas</h4>
+            <textarea id="lhes_interessa" placeholder="Figuras que interessam à pessoa."></textarea>
+            <textarea id="minhas_refugas" placeholder="Minhas figuras refugas que ofereço pra troca"></textarea><br/>
+            <div id="interesse_dele">
+                <h6> Minhas refugas que interessam a ele </h6>
+                <span>
+                    Para ele:<p id="refugas_lhes_interessa"> <p/>
+                    Total: <p id="qtas_interessam_a_ele"></p>
+                </span>
+            </div>
+        </div>
+        <div class="botoes">
+            <input type="reset" value="Limpar Tudo" onclick="limpar();" />
+            <input type="button" value="Verificar" onclick="carregarListas();" /><br/>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
