@@ -114,6 +114,16 @@
         return conteudo;
     }
 
+    function lista_meu_interesses(){
+        let valor_escolhido = document.getElementById("l_entrada").checked;
+
+        if (valor_escolhido){
+            document.getElementById("me_interessam").placeholder="Lista de figuras que eu tenho."
+        }else{
+            document.getElementById(("me_interessam").placeholder="Lista de figuras que me interessam."
+        }
+    }
+
     function carregarListas(){    
         var meus_interesses, minhas_refugas, interesses_dele, refugas_dele, match_pra_mim, match_para_ele;
 
@@ -128,7 +138,7 @@
         aux = document.getElementById("minhas_refugas").value;
         if(aux != ""){
             aux = ajuste_texto_1(aux);//remove string que não são códigos de figuras
-            aux = ajuste_texto_3(aux);//verif. se padrao é o do app alternativo e normailiza
+            //aux = ajuste_texto_3(aux);//verif. se padrao é o do app alternativo e normailiza
             
         }
         minhas_refugas = aux.split(",");
@@ -136,14 +146,14 @@
         aux = document.getElementById("lhes_interessa").value;
         if(aux != ""){
             aux = ajuste_texto_1(aux);//remove string que não são códigos de figuras
-            aux = ajuste_texto_3(aux);//verif. se padrao é o do app alternativo e normailiza       
+            //aux = ajuste_texto_3(aux);//verif. se padrao é o do app alternativo e normailiza       
         }
         interesses_dele = aux.split(",");
 
         aux = document.getElementById("suas_refugas").value;
         if(aux != ""){
             aux = ajuste_texto_1(aux);//remove string que não são códigos de figuras
-            aux = ajuste_texto_3(aux);//verif. se padrao é o do app alternativo e normailiza
+            //aux = ajuste_texto_3(aux);//verif. se padrao é o do app alternativo e normailiza
         }
         refugas_dele = aux.split(",");
 
