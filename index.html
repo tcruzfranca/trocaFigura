@@ -121,7 +121,7 @@
         let aux = document.getElementById("me_interessam").value;
         if(aux != ""){
             aux = ajuste_texto_1(aux);//remove string que não são códigos de figuras
-            aux = ajuste_texto_3(aux);//verif. se padrao é o do app alternativo e normailiza
+            //aux = ajuste_texto_3(aux);//verif. se padrao é o do app alternativo e normailiza
         }
         meus_interesses = aux.split(",");
 
@@ -233,7 +233,7 @@
         <div id="meus_interesses" class="div_text_area">
             <h4> Identificar as figuras que eu quero nas refugas do colega </h4>
             <p>Escolha se quer listar as figuras que já possui ou as que deseja:</p>
-            <input type="radio" id="l_entrada" name="lista_entrada" value="figuras_que_tenho" checked/>
+            <input type="radio" id="l_entrada" name="lista_entrada" value="figuras_que_tenho" checked="true"/>
             <label for="l_entrada">Figuras que já tenho.</label>            
             <input type="radio" id="l_fig_desejadas" name="lista_entrada" value="figuras_desejadas"/>
             <label for="l_fig_desejadas">Figuras que quero ter.</label>
@@ -252,7 +252,7 @@
         <div id="interesses_dele" class="div_text_area">
             <h4> Identificar as figuras que ele quer entre as minhas refugas</h4>
             <p>Escolha se quer listar as figuras que ele possui ou as que ele deseja:</p>
-            <input type="radio" id="l_entrada_colega" name="lista_entrada" value="figuras_que_tenho_colega" checked/>
+            <input type="radio" id="l_entrada_colega" name="lista_entrada" value="figuras_que_tenho_colega" checked="true"/>
             <label for="l_entrada_colega">Figuras que ela já tem.</label>
             <input type="radio" id="l_fig_desejadas_colega" name="lista_entrada" value="figuras_desejadas_colega"/>
             <label for="l_fig_desejadas_colega">Figuras que ele quer.</label>
