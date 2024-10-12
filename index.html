@@ -124,6 +124,16 @@
         }
     }
 
+    function lista_interesses_colega(){
+        let valor_escolhido = document.getElementById("l_entrada_colega").checked;
+
+        if (valor_escolhido){
+            document.getElementById("lhes_interessam").placeholder="Lista de figuras que ele tem."
+        }else{
+            document.getElementById(("lhes_interessam").placeholder="Lista de figuras que interessam à pessoa."
+        }
+    }
+
     function carregarListas(){    
         var meus_interesses, minhas_refugas, interesses_dele, refugas_dele, match_pra_mim, match_para_ele;
 
@@ -243,9 +253,9 @@
         <div id="meus_interesses" class="div_text_area">
             <h4> Identificar as figuras que eu quero nas refugas do colega </h4>
             <p>Escolha se quer listar as figuras que já possui ou as que deseja:</p>
-            <input type="radio" id="l_entrada" name="lista_entrada" value="figuras_que_tenho" checked="true"/>
+            <input type="radio" id="l_entrada" name="lista_entrada" value="figuras_que_tenho" checked="true" onclick="lista_meu_interesses();"/>
             <label for="l_entrada">Figuras que já tenho.</label>            
-            <input type="radio" id="l_fig_desejadas" name="lista_entrada" value="figuras_desejadas"/>
+            <input type="radio" id="l_fig_desejadas" name="lista_entrada" value="figuras_desejadas" onclick="lista_meu_interesses();"/>
             <label for="l_fig_desejadas">Figuras que quero ter.</label>
             <br/>
             <textarea id="me_interessam" placeholder="Lista de figuras que eu tenho (ou quero)."></textarea><br/>                
@@ -262,9 +272,9 @@
         <div id="interesses_dele" class="div_text_area">
             <h4> Identificar as figuras que ele quer entre as minhas refugas</h4>
             <p>Escolha se quer listar as figuras que ele possui ou as que ele deseja:</p>
-            <input type="radio" id="l_entrada_colega" name="lista_entrada_colega" value="figuras_que_tenho_colega" checked="true"/>
+            <input type="radio" id="l_entrada_colega" name="lista_entrada_colega" value="figuras_que_tenho_colega" checked="true" onclick="lista_interesses_colega();"/>
             <label for="l_entrada_colega">Figuras que ela já tem.</label>
-            <input type="radio" id="l_fig_desejadas_colega" name="lista_entrada_colega" value="figuras_desejadas_colega"/>
+            <input type="radio" id="l_fig_desejadas_colega" name="lista_entrada_colega" value="figuras_desejadas_colega" onclick="lista_interesses_colega();"/>
             <label for="l_fig_desejadas_colega">Figuras que ele quer.</label>
             <br/>
             <textarea id="lhes_interessa" placeholder="Figuras que tem ou interessam à pessoa."></textarea><br/>
