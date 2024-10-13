@@ -167,20 +167,38 @@
         }
         refugas_dele = aux.split(",");
 
+        
+           
         match_pra_mim = [];        
         if (meus_interesses.length > 1 && refugas_dele.length > 1){
 
-            for (let i = 0; i < meus_interesses.length; i++){
-                for (let j = 0; j < refugas_dele.length; j++){                
-                    if (meus_interesses[i].trim() == refugas_dele[j].trim())
-                        match_pra_mim.push(refugas_dele[j].trim());
-                } 
+            if (document.getElementById("l_entrada").checked){
+                for (let i = 0; i < refugas_dele.length; i++){
+                    let aux_inclusao = true;
+                    for (let j = 0; j < meus_interesses.length; j++){                
+                        if (meus_interesses[i].trim() == refugas_dele[j].trim()){
+                            aux_inclusao = false;
+                            break;
+                        }
+                    }
+                    if (aux_inclusao){
+                        match_pra_mim.push(refugas_dele[i].trim());
+                    }
+                }
+        
+            }else{
+
+                for (let i = 0; i < meus_interesses.length; i++){
+                    for (let j = 0; j < refugas_dele.length; j++){                
+                        if (meus_interesses[i].trim() == refugas_dele[j].trim())
+                            match_pra_mim.push(refugas_dele[j].trim());
+                    } 
+                }
             }
-        
         }else{
-            match_pra_mim.push("Para ver as figuras que possam te interesssar, preencha os campos: 'Lista de Figuras que Eu Quero' e 'Figuras que ele oferece para troca'");
+            match_pra_mim.push("Para ver as figuras que possam te interesssar, preencha os campos com as listas de figuras.");
         }
-        
+                
 
         match_para_ele = [];
         if (interesses_dele.length > 1 && minhas_refugas.length > 1){
@@ -258,7 +276,7 @@
             <input type="radio" id="l_fig_desejadas" name="lista_entrada" value="figuras_desejadas" onclick="lista_meu_interesses();"/>
             <label for="l_fig_desejadas">Figuras que quero ter.</label>
             <br/>
-            <textarea id="me_interessam" placeholder="Lista de figuras que eu tenho (ou quero)."></textarea><br/>                
+            <textarea id="me_interessam" placeholder="Lista de figuras que eu tenho."></textarea><br/>                
             <textarea id="suas_refugas" placeholder = "Lista de figuras refugas do colega"></textarea>
             <div id="meu_interesse"> 
                 <h6> Refugas dele que me interessam</h6>
@@ -277,7 +295,7 @@
             <input type="radio" id="l_fig_desejadas_colega" name="lista_entrada_colega" value="figuras_desejadas_colega" onclick="lista_interesses_colega();"/>
             <label for="l_fig_desejadas_colega">Figuras que ele quer.</label>
             <br/>
-            <textarea id="lhes_interessa" placeholder="Figuras que tem ou interessam à pessoa."></textarea><br/>
+            <textarea id="lhes_interessa" placeholder="Figuras que a pessoa tem."></textarea><br/>
             <textarea id="minhas_refugas" placeholder="Minhas figuras refugas que ofereço pra troca"></textarea><br/>
             <div id="interesse_dele">
                 <h6> Minhas refugas que interessam a ele </h6>
