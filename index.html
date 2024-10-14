@@ -114,7 +114,7 @@
         return conteudo;
     }
 
-    function lista_meu_interesses(){
+    function lista_meus_interesses(){
         let valor_escolhido = document.getElementById("l_entrada").checked;
 
         if (valor_escolhido){
@@ -249,7 +249,7 @@
         document.getElementById("qtas_interessam_a_ele").value = "";       
 
     }
-    alert("atualizou 1");
+   
 </script>
 
 
@@ -271,9 +271,9 @@
         <div id="meus_interesses" class="div_text_area">
             <h4> Identificar as figuras que eu quero nas refugas do colega </h4>
             <p>Escolha se quer listar as figuras que já possui ou as que deseja:</p>
-            <input type="radio" id="l_entrada" name="lista_entrada" value="figuras_que_tenho" checked="true" onclick="lista_meu_interesses();"/>
+            <input type="radio" id="l_entrada" name="lista_entrada" value="figuras_que_tenho" checked="true" onclick="lista_meus_interesses();"/>
             <label for="l_entrada">Figuras que já tenho.</label>            
-            <input type="radio" id="l_fig_desejadas" name="lista_entrada" value="figuras_desejadas" onclick="lista_meu_interesses();"/>
+            <input type="radio" id="l_fig_desejadas" name="lista_entrada" value="figuras_desejadas" onclick="lista_meus_interesses()"/>
             <label for="l_fig_desejadas">Figuras que quero ter.</label>
             <br/>
             <textarea id="me_interessam" placeholder="Lista de figuras que eu tenho."></textarea><br/>                
